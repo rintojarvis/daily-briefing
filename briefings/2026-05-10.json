@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-10",
+  "generated_at": "2026-05-10T22:06:54.457623Z",
+  "priority": "⚠️ GitHub Actions (telegram-notify.yml) が失敗中。ワークフロー設定を確認してください。",
+  "calendar": [],
+  "mail": [
+    {
+      "from": "notifications@github.com",
+      "subject": "[rintojarvis/daily-briefing] Run failed: telegram-notify.yml",
+      "time": "10:56",
+      "read": false,
+      "summary": "GitHub Actions telegram-notify.ymlが失敗（No jobs were run）。ワークフロー設定の確認が必要。"
+    },
+    {
+      "from": "ritsuha1021@gmail.com",
+      "subject": "Jarvisに自己チェック機能追加できるよ（self_check.md）",
+      "time": "06:44",
+      "read": false,
+      "summary": "JarvisにLv1〜Lv5の自己チェック機能（凡ミス検出・副作用検出・要件確認・自己修復ループ・二重確認）を追加できると提案"
+    },
+    {
+      "from": "ritsuha1021@gmail.com",
+      "subject": "話者分離テスト結果（民法授業文字起こし・先生/生徒A案）",
+      "time": "06:25",
+      "read": false,
+      "summary": "90分授業139ブロックをClaude×4並列で先生/生徒話者分離。125件確定、9件を文脈精査で最終決定"
+    },
+    {
+      "from": "Moodle",
+      "subject": "[Moodle] 憲法入門１ / 第5回 集会・結社の自由！学生の自由.pdf",
+      "time": "14:15",
+      "read": true,
+      "summary": "法科大学院「憲法入門１」第5回の授業PDFが追加されました"
+    },
+    {
+      "from": "no-reply@accounts.google.com",
+      "subject": "セキュリティ通知",
+      "time": "15:04",
+      "read": false,
+      "summary": "無題のプロジェクトにGoogleアカウントデータへのアクセスを許可した通知"
+    }
+  ],
+  "ai_news": [],
+  "general_news": [],
+  "todos": []
+}
