@@ -1,0 +1,69 @@
+name: Telegram Briefing Notification
+
+on:
+  push:
+    paths:
+      - 'briefings/**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get latest briefing
+        id: briefing
+        run: |
+          LATEST=$(ls briefings/*.md 2>/dev/null | sort | tail -1)
+          if [ -z "$LATEST" ]; then
+            echo "No briefing file found"
+            exit 1
+          fi
+          echo "file=$LATEST" >> $GITHUB_OUTPUT
+          # 最初の5行（プレビュー用）
+          PREVIEW=$(head -5 "$LATEST" | tr '\n' ' ')
+          echo "preview<<EOF" >> $GITHUB_OUTPUT
+          echo "$PREVIEW" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          # 全文（4096文字に切り詰め）
+          CONTENT=$(cat "$LATEST" | head -c 4000)
+          echo "content<<EOF" >> $GITHUB_OUTPUT
+          echo "$CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Send Telegram notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python3 << 'PYEOF'
+          import os, urllib.request, urllib.parse, json
+
+          token = os.environ['TELEGRAM_BOT_TOKEN']
+          chat_id = os.environ['TELEGRAM_CHAT_ID']
+          content = os.environ.get('BRIEFING_CONTENT', '')
+
+          # GitHub環境変数から取得
+          import subprocess
+          result = subprocess.run(['cat', os.environ.get('BRIEFING_FILE', '')],
+                                capture_output=True, text=True)
+          text = result.stdout[:4000] if result.stdout else '朝ブリーフィングを取得できませんでした'
+
+          data = json.dumps({
+            'chat_id': chat_id,
+            'text': text,
+            'parse_mode': 'Markdown'
+          }).encode('utf-8')
+
+          req = urllib.request.Request(
+            f'https://api.telegram.org/bot{token}/sendMessage',
+            data=data,
+            headers={'Content-Type': 'application/json'}
+          )
+          resp = urllib.request.urlopen(req)
+          print(f'Sent: {resp.status}')
+          PYEOF
+        env:
+          BRIEFING_FILE: ${{ steps.briefing.outputs.file }}
+          BRIEFING_CONTENT: ${{ steps.briefing.outputs.content }}

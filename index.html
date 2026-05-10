@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朝ブリーフィング</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161922;
+    --surface2: #1e2230;
+    --border: #2a2f3e;
+    --text: #e8eaf0;
+    --text-dim: #8b90a0;
+    --accent: #4f8ef7;
+    --accent2: #7c5af7;
+    --green: #3dd68c;
+    --red: #ff6b6b;
+    --yellow: #ffd166;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-title {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header-date {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* Layout */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 57px);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    overflow-y: auto;
+  }
+  .nav-section {
+    margin-bottom: 8px;
+  }
+  .nav-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 20px 4px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 0.15s;
+    font-size: 14px;
+  }
+  .nav-item:hover { background: var(--surface2); }
+  .nav-item.active {
+    background: rgba(79, 142, 247, 0.12);
+    color: var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+  .badge {
+    margin-left: auto;
+    background: var(--accent);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+  .badge.red { background: var(--red); }
+
+  /* Main content */
+  .main {
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title-icon { font-size: 18px; }
+
+  /* Summary bar */
+  .summary-bar {
+    background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(124,90,247,0.15));
+    border: 1px solid rgba(79,142,247,0.3);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .summary-item { text-align: center; }
+  .summary-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .summary-label { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+  /* Mail items */
+  .mail-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .mail-item:last-child { border-bottom: none; }
+  .mail-item:hover { background: var(--surface2); margin: 0 -20px; padding: 12px 20px; border-radius: 8px; }
+  .mail-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .mail-dot.read { background: var(--border); }
+  .mail-content { flex: 1; min-width: 0; }
+  .mail-from { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .mail-subject { font-size: 13px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mail-time { font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
+
+  /* Event items */
+  .event-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .event-item:last-child { border-bottom: none; }
+  .event-time-block {
+    width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .event-time { font-size: 13px; font-weight: 600; color: var(--accent); }
+  .event-duration { font-size: 10px; color: var(--text-dim); }
+  .event-bar { width: 3px; background: var(--accent2); border-radius: 2px; align-self: stretch; flex-shrink: 0; }
+  .event-title { font-size: 13px; font-weight: 500; }
+  .event-location { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+  /* News items */
+  .news-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item a { color: var(--text); text-decoration: none; }
+  .news-item a:hover .news-title { color: var(--accent); }
+  .news-number {
+    font-size: 11px;
+    color: var(--text-dim);
+    width: 20px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .news-content { flex: 1; }
+  .news-title { font-size: 13px; font-weight: 500; line-height: 1.4; margin-bottom: 4px; }
+  .news-meta { font-size: 11px; color: var(--text-dim); display: flex; gap: 8px; }
+  .news-source {
+    background: var(--surface2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+  }
+  .news-summary { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+
+  /* Priority box */
+  .priority-box {
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .priority-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; margin-bottom: 4px; }
+
+  /* Todo items */
+  .todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .todo-item:last-child { border-bottom: none; }
+  .todo-check {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .todo-tag {
+    font-size: 10px;
+    background: rgba(79,142,247,0.15);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Tab buttons */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    background: var(--surface2);
+    padding: 4px;
+    border-radius: 8px;
+    width: fit-content;
+  }
+  .tab {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    transition: all 0.15s;
+  }
+  .tab.active {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  /* Loading state */
+  .loading {
+    color: var(--text-dim);
+    font-size: 13px;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  /* Sections */
+  .section-id { display: none; }
+  .section-id.active { display: block; }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .summary-bar { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">🌅 朝ブリーフィング</div>
+  <div class="header-date" id="headerDate">読み込み中...</div>
+</div>
+
+<div class="layout">
+  <!-- Sidebar Nav -->
+  <div class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">概要</div>
+      <div class="nav-item active" onclick="showSection('overview')">
+        <span class="nav-icon">🏠</span> ダッシュボード
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">今日の情報</div>
+      <div class="nav-item" onclick="showSection('mail')">
+        <span class="nav-icon">📧</span> Gmail
+        <span class="badge red" id="mailBadge">-</span>
+      </div>
+      <div class="nav-item" onclick="showSection('calendar')">
+        <span class="nav-icon">📅</span> 予定
+        <span class="badge" id="calBadge">-</span>
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">ニュース</div>
+      <div class="nav-item" onclick="showSection('ai-news')">
+        <span class="nav-icon">🤖</span> AI ニュース
+      </div>
+      <div class="nav-item" onclick="showSection('general-news')">
+        <span class="nav-icon">📰</span> 総合ニュース
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">タスク</div>
+      <div class="nav-item" onclick="showSection('tasks')">
+        <span class="nav-icon">✅</span> TODO / メモ
+        <span class="badge" id="taskBadge">-</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Overview section -->
+    <div id="section-overview">
+      <div class="summary-bar">
+        <div class="summary-item">
+          <div class="summary-value" id="statMail">-</div>
+          <div class="summary-label">未読メール</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-value" id="statCal">-</div>
+          <div class="summary-label">今日の予定</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-value" id="statNews">-</div>
+          <div class="summary-label">AIニュース</div>
+        </div>
+      </div>
+
+      <!-- Priority action -->
+      <div id="priorityBox" class="priority-box" style="display:none">
+        <div class="priority-label">🔥 最優先アクション</div>
+        <div id="priorityText"></div>
+      </div>
+
+      <!-- Today's schedule preview -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-icon">📅</span> 今日の予定</div>
+        </div>
+        <div id="calPreview"><div class="loading">データ読み込み中...</div></div>
+      </div>
+
+      <!-- Mail preview -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-icon">📧</span> 重要メール</div>
+        </div>
+        <div id="mailPreview"><div class="loading">データ読み込み中...</div></div>
+      </div>
+
+      <!-- AI news preview -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-icon">🤖</span> AI ニュース</div>
+        </div>
+        <div id="aiNewsPreview"><div class="loading">データ読み込み中...</div></div>
+      </div>
+    </div>
+
+    <!-- Mail section -->
+    <div id="section-mail" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px"><span class="card-title-icon">📧</span> Gmail — 重要メール一覧</div>
+        <div id="mailFull"><div class="loading">データ読み込み中...</div></div>
+      </div>
+    </div>
+
+    <!-- Calendar section -->
+    <div id="section-calendar" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px"><span class="card-title-icon">📅</span> 今日の全予定</div>
+        <div id="calFull"><div class="loading">データ読み込み中...</div></div>
+      </div>
+    </div>
+
+    <!-- AI News section -->
+    <div id="section-ai-news" style="display:none">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('hn')">Hacker News</button>
+        <button class="tab" onclick="switchTab('arxiv')">ArXiv</button>
+      </div>
+      <div class="card">
+        <div id="aiNewsFull"><div class="loading">データ読み込み中...</div></div>
+      </div>
+    </div>
+
+    <!-- General News section -->
+    <div id="section-general-news" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px"><span class="card-title-icon">📰</span> 総合ニュース</div>
+        <div id="generalNewsFull"><div class="loading">データ読み込み中...</div></div>
+      </div>
+    </div>
+
+    <!-- Tasks section -->
+    <div id="section-tasks" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px"><span class="card-title-icon">✅</span> TODO / メモ</div>
+        <div id="tasksFull"><div class="loading">データ読み込み中...</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// 日付表示
+const now = new Date();
+const dateStr = now.toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric',weekday:'long'});
+document.getElementById('headerDate').textContent = dateStr;
+
+// セクション切替
+let currentSection = 'overview';
+function showSection(name) {
+  document.getElementById('section-' + currentSection).style.display = 'none';
+  document.getElementById('section-' + name).style.display = 'block';
+  currentSection = name;
+  // nav active状態
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  loadAiNews(name);
+}
+
+// ブリーフィングデータ読み込み
+let briefingData = null;
+
+async function loadBriefing() {
+  try {
+    // 今日の日付でファイルを試みる
+    const today = now.toISOString().slice(0,10);
+    const resp = await fetch(`briefings/${today}.json`);
+    if (!resp.ok) throw new Error('not found');
+    briefingData = await resp.json();
+    renderAll();
+  } catch(e) {
+    // サンプルデータで表示
+    renderEmpty();
+  }
+}
+
+function renderEmpty() {
+  const msg = '<div class="loading">本日のブリーフィングはまだ生成されていません。<br>毎朝7:00に自動更新されます。</div>';
+  document.getElementById('calPreview').innerHTML = msg;
+  document.getElementById('mailPreview').innerHTML = msg;
+  document.getElementById('aiNewsPreview').innerHTML = msg;
+  document.getElementById('mailFull').innerHTML = msg;
+  document.getElementById('calFull').innerHTML = msg;
+  document.getElementById('aiNewsFull').innerHTML = msg;
+  document.getElementById('generalNewsFull').innerHTML = msg;
+  document.getElementById('tasksFull').innerHTML = msg;
+  document.getElementById('statMail').textContent = '0';
+  document.getElementById('statCal').textContent = '0';
+  document.getElementById('statNews').textContent = '0';
+  document.getElementById('mailBadge').textContent = '0';
+  document.getElementById('calBadge').textContent = '0';
+  document.getElementById('taskBadge').textContent = '0';
+}
+
+function renderAll() {
+  const d = briefingData;
+
+  // Stats
+  const mailCount = (d.mail || []).length;
+  const calCount = (d.calendar || []).length;
+  const aiCount = (d.ai_news || []).length;
+  document.getElementById('statMail').textContent = mailCount;
+  document.getElementById('statCal').textContent = calCount;
+  document.getElementById('statNews').textContent = aiCount;
+  document.getElementById('mailBadge').textContent = mailCount;
+  document.getElementById('calBadge').textContent = calCount;
+  document.getElementById('taskBadge').textContent = (d.todos || []).length;
+
+  // Priority
+  if (d.priority) {
+    document.getElementById('priorityBox').style.display = 'block';
+    document.getElementById('priorityText').textContent = d.priority;
+  }
+
+  // Calendar preview
+  renderCalendar(d.calendar || [], 'calPreview', 3);
+  renderCalendar(d.calendar || [], 'calFull', 999);
+
+  // Mail
+  renderMail(d.mail || [], 'mailPreview', 3);
+  renderMail(d.mail || [], 'mailFull', 999);
+
+  // AI News
+  renderNews(d.ai_news || [], 'aiNewsPreview', 5);
+  renderNews(d.ai_news || [], 'aiNewsFull', 999);
+
+  // General News
+  renderNews(d.general_news || [], 'generalNewsFull', 999);
+
+  // Tasks
+  renderTasks(d.todos || [], 'tasksFull');
+}
+
+function renderCalendar(events, targetId, limit) {
+  if (!events.length) {
+    document.getElementById(targetId).innerHTML = '<div class="loading">今日の予定はありません</div>';
+    return;
+  }
+  const html = events.slice(0, limit).map(ev => `
+    <div class="event-item">
+      <div class="event-time-block">
+        <div class="event-time">${ev.time || '終日'}</div>
+        ${ev.duration ? `<div class="event-duration">${ev.duration}</div>` : ''}
+      </div>
+      <div class="event-bar"></div>
+      <div>
+        <div class="event-title">${ev.title}</div>
+        ${ev.location ? `<div class="event-location">📍 ${ev.location}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById(targetId).innerHTML = html;
+}
+
+function renderMail(mails, targetId, limit) {
+  if (!mails.length) {
+    document.getElementById(targetId).innerHTML = '<div class="loading">重要メールはありません</div>';
+    return;
+  }
+  const html = mails.slice(0, limit).map(m => `
+    <div class="mail-item">
+      <div class="mail-dot${m.read ? ' read' : ''}"></div>
+      <div class="mail-content">
+        <div class="mail-from">${m.from}</div>
+        <div class="mail-subject">${m.subject}</div>
+        ${m.summary ? `<div class="mail-summary" style="font-size:11px;color:var(--text-dim);margin-top:3px">${m.summary}</div>` : ''}
+      </div>
+      <div class="mail-time">${m.time || ''}</div>
+    </div>
+  `).join('');
+  document.getElementById(targetId).innerHTML = html;
+}
+
+function renderNews(items, targetId, limit) {
+  if (!items.length) {
+    document.getElementById(targetId).innerHTML = '<div class="loading">ニュースデータがありません</div>';
+    return;
+  }
+  const html = items.slice(0, limit).map((item, i) => `
+    <div class="news-item">
+      <div class="news-number">${i+1}</div>
+      <div class="news-content">
+        <a href="${item.url || '#'}" target="_blank" rel="noopener">
+          <div class="news-title">${item.title}</div>
+        </a>
+        <div class="news-meta">
+          <span class="news-source">${item.source || 'unknown'}</span>
+          ${item.score ? `<span>▲ ${item.score}</span>` : ''}
+          ${item.date ? `<span>${item.date}</span>` : ''}
+        </div>
+        ${item.summary ? `<div class="news-summary">${item.summary}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById(targetId).innerHTML = html;
+}
+
+function renderTasks(todos, targetId) {
+  if (!todos.length) {
+    document.getElementById(targetId).innerHTML = '<div class="loading">TODOはありません</div>';
+    return;
+  }
+  const html = todos.map(t => `
+    <div class="todo-item">
+      <div class="todo-check"></div>
+      ${t.tag ? `<span class="todo-tag">${t.tag}</span>` : ''}
+      <span>${t.text}</span>
+    </div>
+  `).join('');
+  document.getElementById(targetId).innerHTML = html;
+}
+
+function loadAiNews(tab) {
+  if (!briefingData) return;
+  const data = tab === 'hn' ? (briefingData.hn_news || []) : (briefingData.arxiv || []);
+  renderNews(data, 'aiNewsFull', 999);
+}
+
+// 初期ロード
+loadBriefing();
+</script>
+</body>
+</html>
