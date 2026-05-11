@@ -1,0 +1,85 @@
+{
+  "date": "2026-05-11",
+  "generated_at": "2026-05-11T22:10:06.200975",
+  "priority": "TOEFL iBT TEST対策講座の申込が本日締切（大学国際センター）",
+  "calendar": [
+    {
+      "time": "08:45",
+      "duration": "1時間45分",
+      "title": "憲法入門1",
+      "location": "西2-504"
+    },
+    {
+      "time": "13:15",
+      "duration": "1時間45分",
+      "title": "民事訴訟法入門1",
+      "location": "西2-502"
+    },
+    {
+      "time": "15:10",
+      "duration": "1時間45分",
+      "title": "民法入門演習1",
+      "location": "西2-503"
+    },
+    {
+      "time": "17:00",
+      "duration": "1時間50分",
+      "title": "テニス（A面）",
+      "location": ""
+    }
+  ],
+  "mail": [
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "[重要]令和８年度第１学期 授業評価",
+      "time": "17:32",
+      "read": false,
+      "summary": "学習院G-Portからの重要通知。授業評価の実施案内。"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "本日締切！TOEFL iBT TEST対策講座 参加者募集中！",
+      "time": "14:42",
+      "read": false,
+      "summary": "大学国際センター主催。受講料補助付き。本日が申込締切。"
+    },
+    {
+      "from": "genhashimoto@breeze.gr.jp",
+      "subject": "R6.9.8の交通事故の件",
+      "time": "09:59",
+      "read": true,
+      "summary": "横浜綜合法律事務所橋本弁護士より。訴訟関連の重要スレッド（スター付き）。"
+    },
+    {
+      "from": "invoice+statements@mail.anthropic.com",
+      "subject": "Your receipt from Anthropic, PBC #2866-8650-9794",
+      "time": "06:21",
+      "read": false,
+      "summary": "Anthropicからの領収書。"
+    },
+    {
+      "from": "invoice+statements@mail.anthropic.com",
+      "subject": "Your receipt from Anthropic, PBC #2172-2437-4726",
+      "time": "06:05",
+      "read": false,
+      "summary": "Anthropicからの領収書。"
+    },
+    {
+      "from": "no-reply@accounts.google.com",
+      "subject": "セキュリティ通知",
+      "time": "00:34",
+      "read": false,
+      "summary": "Googleアカウントへのアクセス許可通知。要確認。"
+    },
+    {
+      "from": "no-reply@blend.school",
+      "subject": "[BLEND] 芝国際高等学校から連絡がありました",
+      "time": "06:33",
+      "read": false,
+      "summary": "保護者後援会・保護者と教職員の交流会のお知らせ。"
+    }
+  ],
+  "ai_news": [],
+  "general_news": [],
+  "todos": []
+}
