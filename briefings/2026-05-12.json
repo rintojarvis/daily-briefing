@@ -1,0 +1,53 @@
+{
+  "date": "2026-05-12",
+  "generated_at": "2026-05-12T22:09:54.607223",
+  "priority": "停電注意・漢字検定(6/12)・TOEFL締切(5/15)",
+  "calendar": [],
+  "mail": [
+    {
+      "from": "ritsuha1021@gmail.com",
+      "subject": "Jarvisが普段読んでるMDの量（風呂での携帯の借り）",
+      "time": "06:28",
+      "read": false,
+      "summary": "JarvisのMD常駐コンテキスト量についての連絡"
+    },
+    {
+      "from": "ritsuha1021@gmail.com",
+      "subject": "自己チェックの実例パック ─ そっちのAI進化用素材",
+      "time": "02:16",
+      "read": true,
+      "summary": "AIが過去2日で自己修復した8パターンの実例パック"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "【学習院G-Port】新着情報（目白地区停電・奨学金募集）",
+      "time": "02:16",
+      "read": true,
+      "summary": "[重要]目白地区停電のお知らせ、公益財団法人先端教育振興機構奨学金募集"
+    },
+    {
+      "from": "no-reply@blend.school",
+      "subject": "[BLEND] 6/12（金）日本漢字能力検定のお知らせ",
+      "time": "14:53",
+      "read": false,
+      "summary": "6月12日実施の漢字検定案内"
+    },
+    {
+      "from": "invoice+statements@mail.anthropic.com",
+      "subject": "Your receipt from Anthropic, PBC #2293-8959-7724",
+      "time": "06:47",
+      "read": false,
+      "summary": "Anthropic利用料領収書"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "TOEFL iBT TEST対策講座 追加募集（5/15締切）",
+      "time": "22:05",
+      "read": false,
+      "summary": "5/15締切、受講料補助付きTOEFL講座追加募集"
+    }
+  ],
+  "ai_news": [],
+  "general_news": [],
+  "todos": []
+}
