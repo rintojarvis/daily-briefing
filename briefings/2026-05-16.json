@@ -1,0 +1,65 @@
+{
+  "date": "2026-05-16",
+  "generated_at": "2026-05-16T07:12:03.017267+09:00",
+  "priority": "TOYOTAアカウントへの不審なログインを確認してください",
+  "calendar": [
+    {
+      "time": "10:40",
+      "duration": "1時間45分",
+      "title": "民法入門2",
+      "location": "西2-502"
+    },
+    {
+      "time": "15:10",
+      "duration": "1時間45分",
+      "title": "アメリカ法",
+      "location": "中央-401"
+    },
+    {
+      "time": "18:50",
+      "duration": "1時間50分",
+      "title": "テニス（C面）",
+      "location": ""
+    }
+  ],
+  "mail": [
+    {
+      "from": "info@id.toyota",
+      "subject": "【TOYOTAアカウント】ログインアラート通知",
+      "time": "13:23",
+      "read": false,
+      "summary": "普段利用でない端末・ブラウザからのログインを検知"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "大学からのお知らせ:【国際センター】台湾の大学生との交流会ボランティア募集",
+      "time": "11:34",
+      "read": false,
+      "summary": "台湾の大学生と英語・中国語で交流するボランティア募集"
+    },
+    {
+      "from": "sms_dai1_kyomukikaku@itojuku.co.jp",
+      "subject": "5/31まで応援価格1,000円!!『予備試験 全国公開短答模試』",
+      "time": "09:07",
+      "read": false,
+      "summary": "予備試験短答模試の案内。応援価格は5/31まで"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "【学習院G-Port】新着情報のお知らせ",
+      "time": "17:44",
+      "read": false,
+      "summary": "空調機フィルター清掃点検のお知らせ 他"
+    },
+    {
+      "from": "anamagazine@mail.ana.co.jp",
+      "subject": "まもなく終了／国内線&国際線航空券タイムセール",
+      "time": "08:59",
+      "read": false,
+      "summary": "国内線・国際線航空券タイムセール まもなく終了"
+    }
+  ],
+  "ai_news": [],
+  "general_news": [],
+  "todos": []
+}
