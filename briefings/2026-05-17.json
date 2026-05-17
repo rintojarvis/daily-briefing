@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-17",
+  "generated_at": "2026-05-17T22:07:49.462220",
+  "priority": "⚠️ Googleセキュリティ通知を確認してください（Apple iPhoneからの不審なログイン）",
+  "calendar": [],
+  "mail": [
+    {
+      "from": "no-reply@accounts.google.com",
+      "subject": "セキュリティ通知 - Apple iPhoneからの新しいログイン",
+      "time": "18:27",
+      "read": false,
+      "summary": "Apple iPhoneからGoogleアカウントへの新しいログインが検出されました。"
+    },
+    {
+      "from": "rinto0210@gmail.com",
+      "subject": "Re: [Moodle] 法学入門講義 / 第７回 判例を読む①",
+      "time": "22:01",
+      "read": false,
+      "summary": "インターネット検索結果削除請求事件①②を参考に予習課題を作成依頼中。"
+    },
+    {
+      "from": "post_master@netbk.co.jp",
+      "subject": "振込サービス臨時メンテナンスのご案内",
+      "time": "09:22",
+      "read": false,
+      "summary": "5月23日(土)〜24日(日) 振込サービス利用不可（臨時メンテナンス）。"
+    },
+    {
+      "from": "feedback@moneyforward.com",
+      "subject": "【Money Forward ME】ウィークリーメール",
+      "time": "01:48",
+      "read": false,
+      "summary": "今週の支出合計: ¥18,270。"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "台湾の大学生との交流会ボランティア募集",
+      "time": "20:34",
+      "read": true,
+      "summary": "国際センターより台湾大学生との英語・中国語交流会ボランティア募集。"
+    }
+  ],
+  "ai_news": [],
+  "general_news": [],
+  "todos": []
+}
