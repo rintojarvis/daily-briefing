@@ -1,0 +1,71 @@
+{
+  "date": "2026-05-18",
+  "generated_at": "2026-05-18T22:08:13.072870",
+  "priority": "⚠️ Googleセキュリティ通知あり・法学入門演習の予習課題要確認",
+  "calendar": [
+    {
+      "time": "08:45",
+      "duration": "1時間45分",
+      "title": "憲法入門1",
+      "location": "西2-504"
+    },
+    {
+      "time": "13:15",
+      "duration": "1時間45分",
+      "title": "民事訴訟法入門1",
+      "location": "西2-502"
+    },
+    {
+      "time": "15:10",
+      "duration": "1時間45分",
+      "title": "民法入門演習1",
+      "location": "西2-503"
+    },
+    {
+      "time": "17:00",
+      "duration": "1時間50分",
+      "title": "テニス（A面）",
+      "location": ""
+    }
+  ],
+  "mail": [
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "【学習院G-Port】ベトナム スタディーツアー説明会追加開催（5/21 お昼休み）",
+      "time": "02:45",
+      "read": false,
+      "summary": "大学キャリアセンターより。5/21昼休みに学習院大学ベトナムスタディーツアー説明会の追加開催。"
+    },
+    {
+      "from": "g-port-noreply@gakushuin.ac.jp",
+      "subject": "TOEFL iBT TEST対策講座 限定2名追加募集（5/31締切）",
+      "time": "17:14",
+      "read": true,
+      "summary": "国際センターより。受講料補助付き。限定2名、5/31締切。"
+    },
+    {
+      "from": "no-reply@accounts.google.com",
+      "subject": "セキュリティ通知",
+      "time": "08:35",
+      "read": false,
+      "summary": "Microsoft apps & services に Google アカウントのデータへのアクセスを許可しました。"
+    },
+    {
+      "from": "rinto0210@gmail.com",
+      "subject": "法学入門講義 予習課題（第7回 判例を読む①）",
+      "time": "07:01",
+      "read": false,
+      "summary": "インターネット検索結果削除請求事件①②のPDFを参考に予習課題作成中。"
+    },
+    {
+      "from": "post_master@netbk.co.jp",
+      "subject": "振込サービス臨時メンテナンスのご案内",
+      "time": "09:22",
+      "read": false,
+      "summary": "住信SBIネット銀行。5/23(土)8:00〜21:30、5/24(日)9:00〜21:30 振込サービス停止。"
+    }
+  ],
+  "ai_news": [],
+  "general_news": [],
+  "todos": []
+}
